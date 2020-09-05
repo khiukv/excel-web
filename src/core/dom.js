@@ -14,7 +14,7 @@ class Dom {
   }
 
   text(text) {
-    if (typeof text === 'string') {
+    if (typeof text !== 'undefined') {
       this.$el.textContent = text;
       return this;
     }
@@ -35,6 +35,10 @@ class Dom {
 
   off(eventType, callback) {
     this.$el.removeEventListener(eventType, callback);
+  }
+
+  find(selector) {
+    return $(this.$el.querySelector(selector));
   }
 
   append(node) {
@@ -63,18 +67,23 @@ class Dom {
     return this.$el.getBoundingClientRect();
   }
 
-  find(selector) {
-    return $(this.$el.querySelector(selector));
-  }
-
   findAll(selector) {
     return this.$el.querySelectorAll(selector);
   }
 
   css(styles = {}) {
-    Object.keys(styles).forEach(key => {
-      this.$el.style[key] = styles[key];
-    });
+    Object
+        .keys(styles)
+        .forEach(key => {
+          this.$el.style[key] = styles[key];
+        });
+  }
+
+  getStyles(styles = []) {
+    return styles.reduce((res, s) => {
+      res[s] = this.$el.style[s];
+      return res;
+    }, {});
   }
 
   id(parse) {
@@ -93,6 +102,14 @@ class Dom {
     return this;
   }
 
+  attr(name, value) {
+    if (value) {
+      this.$el.setAttribute(name, value);
+      return this;
+    }
+    return this.$el.getAttribute(name);
+  }
+
   addClass(className) {
     this.$el.classList.add(className);
     return this;
@@ -104,7 +121,6 @@ class Dom {
   }
 }
 
-// event.target
 export function $(selector) {
   return new Dom(selector);
 }
