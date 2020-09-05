@@ -7,11 +7,11 @@
   right: 0;
   left: 0;
   height: $header-height;
-  padding: 8px 4px;
+  padding: 8px 4px 0;
   display: flex;
   justify-content: space-between;
 
-  .input {
+  & .input {
     margin: 0;
     padding: 2px 7px;
     min-width: 1px;
@@ -35,4 +35,5 @@
   .button {
     @include button(red);
   }
+
 }
