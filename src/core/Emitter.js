@@ -17,7 +17,7 @@ export class Emitter {
   }
 
   // on, listen
-  // Subscribe to the notification
+  // Subscribe to the event
   // Adding a new listener
   // formula.subscribe('table:select', () => {})
   subscribe(event, fn) {

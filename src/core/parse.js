@@ -6,5 +6,6 @@ export function parse(value = '') {
       return value;
     }
   }
-  return '';
+  return value;
 }
+
